@@ -9,15 +9,24 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-// Configure MongoDB
-var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
-if (mongoDbSettings == null || string.IsNullOrEmpty(mongoDbSettings.ConnectionString))
+// Configure MongoDB - Read from environment variables first, then configuration
+var connectionString = Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING") 
+    ?? builder.Configuration["MongoDbSettings:ConnectionString"];
+var databaseName = Environment.GetEnvironmentVariable("MONGODB_DATABASE_NAME") 
+    ?? builder.Configuration["MongoDbSettings:DatabaseName"];
+
+if (string.IsNullOrEmpty(connectionString))
 {
-    throw new InvalidOperationException("MongoDB connection string is not configured.");
+    throw new InvalidOperationException("MongoDB connection string is not configured. Please set MONGODB_CONNECTION_STRING environment variable or configure it in appsettings.json");
 }
 
-var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
-var mongoDatabase = mongoClient.GetDatabase(mongoDbSettings.DatabaseName);
+if (string.IsNullOrEmpty(databaseName))
+{
+    throw new InvalidOperationException("MongoDB database name is not configured. Please set MONGODB_DATABASE_NAME environment variable or configure it in appsettings.json");
+}
+
+var mongoClient = new MongoClient(connectionString);
+var mongoDatabase = mongoClient.GetDatabase(databaseName);
 
 // Register services
 builder.Services.AddSingleton<IMongoDatabase>(mongoDatabase);

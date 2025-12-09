@@ -45,4 +45,5 @@
 /Users/aarushyadav/Documents/Asp.net/MyApi/bin/Debug/net10.0/runtimes/osx/native/libmongocrypt.dylib
 /Users/aarushyadav/Documents/Asp.net/MyApi/bin/Debug/net10.0/runtimes/win/native/mongocrypt.dll
 /Users/aarushyadav/Documents/Asp.net/MyApi/bin/Debug/net10.0/MyApi.staticwebassets.runtime.json
-/Users/aarushyadav/Documents/Asp.net/MyApi/obj/Debug/net10.0/compressed/q6xmf58bcs-{0}-l0omp9ukmr-l0omp9ukmr.gz
+/Users/aarushyadav/Documents/Asp.net/MyApi/obj/Debug/net10.0/MyApi.sourcelink.json
+/Users/aarushyadav/Documents/Asp.net/MyApi/obj/Debug/net10.0/compressed/q6xmf58bcs-{0}-u4v9m3l1t1-u4v9m3l1t1.gz
